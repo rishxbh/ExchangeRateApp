@@ -4,6 +4,8 @@
 WARNING (IMPORTANT) : 
 I dont have access to premium api key so have commented @Scheduled annotation in ScheduledService, by this, application will not fetch and store the data.
 
+Example endpoint : https://v6.exchangerate-api.com/v6/YOUR-API-KEY/history/USD/YEAR/MONTH/DAY
+
 To use full functionality, before initializing the application kindly go to ScheduledService class (path : src/main/java/com/rishabh/exchangeRate/services/SchedulerService.java) and REPLACE the "API KEY" in String baseURL with a valid premium key to fetch historical data and un-comment the @Scheduled annotation.
 Else, manually feed the data to database and test other functionalities of application.
 
