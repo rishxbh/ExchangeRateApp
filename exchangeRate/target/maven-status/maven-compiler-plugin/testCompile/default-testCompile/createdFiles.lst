@@ -1,0 +1,4 @@
+com\rishabh\exchangeRate\ExchangeRateApplicationTests.class
+com\rishabh\exchangeRate\controller\RateControllerTest.class
+com\rishabh\exchangeRate\services\SchedulerServiceTest.class
+com\rishabh\exchangeRate\services\RateServiceImplTest.class

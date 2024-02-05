@@ -40,7 +40,7 @@ class SchedulerServiceTest {
 
         // Verifying repository method is called
         verify(rateRepository, atLeastOnce()).findByDate(anyString());
-        verify(rateRepository, times(377)).save(any());
+        verify(rateRepository, times(367)).save(any());
     }
 
     @Test

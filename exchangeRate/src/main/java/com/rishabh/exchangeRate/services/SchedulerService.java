@@ -18,20 +18,25 @@ public class SchedulerService {
     private RateRepository rateRepository;
     @Autowired
     private RestTemplate restTemplate;
+
     private static final Logger logger = LoggerFactory.getLogger(SchedulerService.class);
-    @Scheduled(fixedRate = 3600000)
+//    @Scheduled(fixedRate = 3600000)
     public void fetchRateData() {
 
-        int daysToBeFetched = 4;  //366
+        int daysToBeFetched = 366;
         int dayNumberFromToday = 0;
         LocalDate today = LocalDate.now();
-        String baseUrl = "https://v6.exchangerate-api.com/v6/b8caa451769b1f92aaf9f3b5/history/USD/";
+        String baseUrl = "https://v6.exchangerate-api.com/v6/API_KEY/history/USD/";
+
+//      this loop will iterate from today's date to last 367 days
         while(dayNumberFromToday <= daysToBeFetched) {
             LocalDate date = today.minusDays(dayNumberFromToday);
             dayNumberFromToday++;
             String dateString = date.toString().replace('-','/');
             if(rateRepository.findByDate(date.toString()) == null) {
                 ApiCallHandler data = restTemplate.getForObject(baseUrl + dateString, ApiCallHandler.class);
+
+//              Observer pattern to observe input result
                 logger.warn(data.getResult());
                 if(data.getResult().equals("success")) {
                     ExchangeRate exchangeRate = new ExchangeRate();

@@ -39,6 +39,20 @@ public class RateServiceImpl implements RateService{
         response.setLast12Month(getDiff(todayRate, twelveMonthAgo, currency));
         return response;
     }
+    public String getDiff(Double todayRate, LocalDate diffDate, String currency) {
+        ExchangeRate diffDateExchangeRate = null;
+        if(diffDate != null) {
+            diffDateExchangeRate = rateRepository.findByDate(diffDate.toString());
+        }
+        if(diffDateExchangeRate == null) {
+            return "No Data Found";
+        } else {
+            Map<String, Double> diffDateCurrencies = diffDateExchangeRate.getCurrencies();
+            Double diffDateRate = diffDateCurrencies.get(currency);
+            double percentage = ((todayRate - diffDateRate) / diffDateRate) * 100;
+            return todayRate > diffDateRate ? "+"+ percentage : "" + percentage;
+        }
+    }
 
     @Override
     public ExchangeRate postData(InsertionRequest request) {
@@ -72,18 +86,4 @@ public class RateServiceImpl implements RateService{
         }
     }
 
-    public String getDiff(Double todayRate, LocalDate diffDate, String currency) {
-        ExchangeRate diffDateExchangeRate = null;
-        if(diffDate != null) {
-            diffDateExchangeRate = rateRepository.findByDate(diffDate.toString());
-        }
-        if(diffDateExchangeRate == null) {
-            return "No Data Found";
-        } else {
-            Map<String, Double> diffDateCurrencies = diffDateExchangeRate.getCurrencies();
-            Double diffDateRate = diffDateCurrencies.get(currency);
-            double percentage = ((todayRate - diffDateRate) / diffDateRate) * 100;
-            return todayRate > diffDateRate ? "+"+ percentage : "" + percentage;
-        }
-    }
 }
