@@ -1,22 +1,29 @@
 "# ExchangeRateApp" 
 -------------------------
+
 WARNING (IMPORTANT) : 
 I dont have access to premium api key so have commented @Scheduled annotation in ScheduledService, by this, application will not fetch and store the data.
 
 To use full functionality, before initializing the application kindly go to ScheduledService class (path : src/main/java/com/rishabh/exchangeRate/services/SchedulerService.java) and REPLACE the "API KEY" in String baseURL with a valid premium key to fetch historical data and un-comment the @Scheduled annotation.
-
 Else, manually feed the data to database and test other functionalities of application.
+
 -------------------------
 Exchange Rate API Documentation
 Overview :
+
 The Exchange Rate API provides endpoints to retrieve exchange rate differences for various currencies and to manage exchange rate data.
 
 Prerequisite :
 -> Java 17
+
 -> Maven
+
 -> Spring Boot
+
 -> MongoDB 
+
     -> Start MongoDB server in your local machine with default port : 27017
+    
     -> Add new Database named myDB with collection rates
 
 How to Run Locally :
